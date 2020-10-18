@@ -60,9 +60,9 @@ export class NSwag {
 
 	public run(configFilePath: string, options: Options): Promise<string>
 	public run(configFilePath: string, _options: Options) {
-		const options = _options
+		const options = _options as _Options
 
-		let url = options.input && 'path' in options.input ? options.input?.path : options.input?.url
+		let url = options.input?.path ?? options.input?.url
 
 		if (typeof configFilePath !== 'string')
 			throw new Error(`Parameter configFilePath must be of type string.`)
@@ -154,19 +154,26 @@ export class NSwag {
 	}
 }
 
-export type Core = 'Win x64' | 'Win x86' | 'NetCore 2.1' | 'NetCore 2.2' | 'NetCore 3.0' | 'NetCore 3.1'
-export type Arch = 'arm' | 'arm64' | 'ia32' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64'
-export type Platform = NodeJS.Platform
-
-export interface Options {
+interface OptionsBase {
 	runtime?: Core,
 	variables?: string,
-	input: { url: string | undefined, json?: string } | { path: string | undefined, json?: string } | undefined,
 	outputs: {
 		[key: string]: string | undefined
 		openApiToTypeScriptClient: string | undefined
 	},
 	configMod?: Config
+}
+
+interface _Options extends OptionsBase {
+	input: { url?: string, path?: string, json?: string } | undefined
+}
+
+export type Core = 'Win x64' | 'Win x86' | 'NetCore 2.1' | 'NetCore 2.2' | 'NetCore 3.0' | 'NetCore 3.1'
+export type Arch = 'arm' | 'arm64' | 'ia32' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64'
+export type Platform = NodeJS.Platform
+
+export interface Options extends OptionsBase {
+	input: { url: string } | { path: string, json?: string } | { json: string } | undefined,
 }
 
 export interface Config {
@@ -194,15 +201,8 @@ export namespace NSwag {
 	export type Arch = 'arm' | 'arm64' | 'ia32' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64'
 	export type Platform = NodeJS.Platform
 
-	export interface Options {
-		runtime?: Core,
-		variables?: string,
-		input: { url: string | undefined, json?: string } | { path: string | undefined, json?: string } | undefined,
-		outputs: {
-			[key: string]: string | undefined
-			openApiToTypeScriptClient: string | undefined
-		},
-		configMod?: Config
+	export interface Options extends OptionsBase {
+		input: { url: string } | { path: string, json?: string } | { json: string } | undefined,
 	}
 
 	export interface Config {
