@@ -15,7 +15,7 @@
 		"typescript": "^4.0.3"
 	},
 	"scripts": {
-		"build": "./node_modules/.bin/tsc -p .",
+		"build": "tsc",
 		"test": "mocha -r ts-node/register tests/main.test.ts"
 	},
 	"repository": {
