@@ -154,7 +154,8 @@ export class NSwag {
 	}
 }
 
-interface OptionsBase {
+export interface Options {
+	input: { url: string, path?: string, json?: string },
 	runtime?: Core,
 	variables?: string,
 	outputs: {
@@ -164,17 +165,11 @@ interface OptionsBase {
 	configMod?: Config
 }
 
-interface _Options extends OptionsBase {
-	input: { url?: string, path?: string, json?: string } | undefined
-}
+interface _Options extends Options { }
 
 export type Core = 'Win x64' | 'Win x86' | 'NetCore 2.1' | 'NetCore 2.2' | 'NetCore 3.0' | 'NetCore 3.1'
 export type Arch = 'arm' | 'arm64' | 'ia32' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64'
 export type Platform = NodeJS.Platform
-
-export interface Options extends OptionsBase {
-	input: { url: string } | { path: string, json?: string } | { json: string } | undefined,
-}
 
 export interface Config {
 	[key: string]: unknown
@@ -196,34 +191,16 @@ export interface Config {
 	}
 }
 
+interface _Config extends Config { }
+
 export namespace NSwag {
 	export type Core = 'Win x64' | 'Win x86' | 'NetCore 2.1' | 'NetCore 2.2' | 'NetCore 3.0' | 'NetCore 3.1'
 	export type Arch = 'arm' | 'arm64' | 'ia32' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64'
 	export type Platform = NodeJS.Platform
 
-	export interface Options extends OptionsBase {
-		input: { url: string } | { path: string, json?: string } | { json: string } | undefined,
-	}
+	export interface Options extends _Options { }
 
-	export interface Config {
-		[key: string]: unknown
-		runtime: string,
-		defaultVariables: string | null,
-		documentGenerator: {
-			fromDocument: {
-				json: string | null,
-				url: string | null,
-				output: unknown,
-				newLineBehavior: string
-			}
-		},
-		codeGenerators: {
-			[key: string]: {
-				[key: string]: unknown
-				output: string | null
-			}
-		}
-	}
+	export interface Config extends _Config { }
 }
 
 function exec(file: string, args: string[]) {
