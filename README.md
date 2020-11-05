@@ -1,7 +1,7 @@
 ## NSwag.JS
 <b>JavaScript API for [NSwag](https://github.com/RicoSuter/NSwag) - The Swagger/OpenAPI toolchain for .NET, ASP.NET Core and TypeScript.</b>
 
-### Example
+## Example
 
 <details>
 <summary><strong>JavaScript Import</strong></summary>
@@ -41,17 +41,15 @@ await nswag.run(path.join(__dirname, 'main.nswag'), {
 await nswag.openapi2tsclient(path.join(__dirname, 'main.openapi.json'), path.join(__dirname, 'generated/run.test.ts'))
 ```
 
-### Useful tools
+## Useful tools
 
 [@accility/protoc-swagger-plugin](https://www.npmjs.com/package/@accility/protoc-swagger-plugin) — Protocol Buffer to Swagger/OpenAPI plguin for [@accility/protoc-tools](https://www.npmjs.com/package/@accility/protoc-tools).
 
-[[Add link to useful tool](https://github.com/tscpp/nswagjs/fork)]
+## Upcoming updates
 
-### Upcoming updates
+ - Support for the openapi2csclient, .NET Swagger Generator, and JSON Schema Converters will be implemented in v2.0.
 
-Support for swagger generators is not going to be implemented due to the deprication.
+_Support for swagger generators is not going to be implemented due to the deprication._
 
-Support for the openapi2csclient, .NET Swagger Generator, and JSON Schema Converters will be implemented in v2.0.
-
-### License
-This project is licensed under [MIT](LICENSE).
+## License
+This project is licensed under [MIT](./LICENSE).
