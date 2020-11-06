@@ -5,6 +5,8 @@ import * as path from 'path'
 import * as fs from 'fs'
 import * as assert from 'assert'
 
+const nswagPath = path.join(__dirname, '../node_modules/nswag')
+
 process.stdout.write('\x1b[4mInclude this in your pull request:\x1b[0m')
 
 if (!fs.existsSync(path.join(__dirname, 'generated')))
@@ -27,7 +29,7 @@ describe('static', () => {
 
 describe('run()', () => {
 	it('should generate client files', async () => {
-		const nswag = new NSwag(coreVersion ??= NSwag.getCoreVersion() ?? 'NetCore 2.1')
+		const nswag = new NSwag(nswagPath, coreVersion ??= NSwag.getCoreVersion() ?? 'NetCore 2.1')
 
 		await nswag.run(path.join(__dirname, 'resources/main.nswag'), {
 			input: {
@@ -42,7 +44,7 @@ describe('run()', () => {
 	})
 
 	it('should download openapi/swagger from a url', async () => {
-		const nswag = new NSwag(coreVersion ??= NSwag.getCoreVersion() ?? 'NetCore 2.1')
+		const nswag = new NSwag(nswagPath, coreVersion ??= NSwag.getCoreVersion() ?? 'NetCore 2.1')
 
 		await nswag.run(path.join(__dirname, 'resources/main.nswag'), {
 			input: {
@@ -59,7 +61,7 @@ describe('run()', () => {
 
 describe('openapi2tsclient()', () => {
 	it('should generate a TypeScript client file', async () => {
-		const nswag = new NSwag(coreVersion ??= NSwag.getCoreVersion() ?? 'NetCore 2.1')
+		const nswag = new NSwag(nswagPath, coreVersion ??= NSwag.getCoreVersion() ?? 'NetCore 2.1')
 
 		await nswag.openapi2tsclient(path.join(__dirname, 'resources/main.nswag'), path.join(__dirname, 'generated/tsclient.test.ts'))
 

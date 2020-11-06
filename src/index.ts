@@ -41,7 +41,7 @@ export class NSwag {
 		}
 	}
 
-	public constructor(private core: Core) { }
+	public constructor(private nswagPath: string, private core: Core) { }
 
 	private get coreExecName() {
 		switch (this.core) {
@@ -54,9 +54,7 @@ export class NSwag {
 		}
 	}
 
-	private coreExec = !fs.existsSync(path.join(__dirname, `../../node_modules/nswag/bin/binaries/${this.coreExecName}`)) ?
-		path.join(__dirname, `../node_modules/nswag/bin/binaries/${this.coreExecName}`) :
-		path.join(__dirname, `../../node_modules/nswag/bin/binaries/${this.coreExecName}`)
+	private coreExec = path.join(this.nswagPath, `bin/binaries/${this.coreExecName}`)
 
 	public run(configFilePath: string, options: Options): Promise<string>
 	public run(configFilePath: string, _options: Options) {
@@ -155,7 +153,7 @@ export class NSwag {
 }
 
 export interface Options {
-	input: { url: string, path?: string, json?: string },
+	input: { url?: string, path?: string, json?: string },
 	runtime?: Core,
 	variables?: string,
 	outputs: {

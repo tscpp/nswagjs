@@ -18,7 +18,7 @@ const nswag = new NSwag(NSwag.getCoreVersion())
 ```typescript
 import * as NSwag from 'nswagjs'
 
-const nswag = new NSwag(NSwag.getCoreVersion())
+const nswag = new NSwag('./node_modules/nswag', NSwag.getCoreVersion())
 ```
 
 **Executing a .nswag configuration document by using the run method**
