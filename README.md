@@ -5,18 +5,17 @@
 
 <details>
 <summary><strong>JavaScript Import</strong></summary>
-
-**Importing NSwag**
-```typescript
-const { NSwag } = require('nswagjs')
+	
+```javascript
+const NSwag = require('nswagjs').NSwag
 
 const nswag = new NSwag(NSwag.getCoreVersion())
 ```
-</details><br>
+</details>
 
 **Importing NSwag**
 ```typescript
-import * as NSwag from 'nswagjs'
+import NSwag from 'nswagjs'
 
 const nswag = new NSwag('./node_modules/nswag', NSwag.getCoreVersion())
 ```
