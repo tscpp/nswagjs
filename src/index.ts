@@ -146,8 +146,8 @@ export class NSwag {
 	}
 
 	public openapi2tsclient(input: string, output: string) {
-		input = input.replace(/\\/g, '/')
-		output = output.replace(/\\/g, '/')
+		input = input.replace(/\\/g, '/').replace(/^[a-zA-Z]:/, '')
+		output = output.replace(/\\/g, '/').replace(/^[a-zA-Z]:/, '')
 		return exec(this.coreExec, ['openapi2tsclient', `/input:${input}`, `/output:${output}`])
 	}
 }
